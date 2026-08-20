@@ -1,0 +1,20 @@
+# Dépendances
+/node_modules
+
+# Next.js & Build
+/.next/
+/out/
+/build
+
+# Variables d'environnement
+.env
+.env*.local
+
+# Logs & Système
+npm-debug.log*
+.DS_Store
+*.pem
+
+# Agents
+.agent
+
