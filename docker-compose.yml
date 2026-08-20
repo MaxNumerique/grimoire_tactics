@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  app:
+    image: ghcr.io/maxnumerique/grimoire_tactics:latest
+    container_name: grimoire_tactics_app
+    restart: always
+    ports:
+      - "3001:3000"
+    environment:
+      - DATABASE_URL=postgresql://grimoire_user:grimoire_password@postgres:5432/grimoire_db?schema=public
+      - NODE_ENV=production
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: grimoire_tactics_db
+    restart: always
+    environment:
+      - POSTGRES_USER=grimoire_user
+      - POSTGRES_PASSWORD=grimoire_password
+      - POSTGRES_DB=grimoire_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
