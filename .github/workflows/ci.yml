@@ -2,12 +2,26 @@ name: CI Checks
 
 on:
   pull_request:
+    types:
+      - opened
+      - edited
+      - synchronize
     branches:
       - dev
       - main
 
 jobs:
+  validate-conventional-commit:
+    name: Validate Conventional Commit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate Conventional Commit
+        uses: amannn/action-semantic-pull-request@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   verify:
+    name: Lint, Build and Code Verification
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
