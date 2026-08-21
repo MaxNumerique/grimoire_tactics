@@ -21,14 +21,17 @@ jobs:
         with:
           node-version: 22
 
+      - name: Check Semantic Commit
+        run: git log origin/${{ github.base_ref }}..HEAD --oneline | grep -qE ' (feat|fix|docs|refactor|chore)(\(.*\))?:'
+
       - name: Install Dependencies
         run: npm install
 
       - name: Run Oxlint
         run: npm run lint
 
+      - name: Run Unit Tests
+        run: npm test
+
       - name: Build Next.js Application
         run: npm run build
-
-      - name: Check Semantic Commit
-        run: git log origin/${{ github.base_ref }}..HEAD --oneline | grep -qE ' (feat|fix|docs|refactor|chore)(\(.*\))?:'
