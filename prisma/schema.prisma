@@ -1,0 +1,64 @@
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id           String           @id @default(uuid())
+  email        String           @unique
+  password     String
+  gold         Int              @default(1000)
+  gems         Int              @default(100)
+  characters   OwnedCharacter[]
+  equipments   OwnedEquipment[]
+  createdAt    DateTime         @default(now())
+}
+
+model CharacterTemplate {
+  id             String           @id @default(uuid())
+  name           String
+  characterClass String
+  rarity         String
+  baseHealth     Int
+  baseAttack     Int
+  baseDefense    Int
+  baseSpeed      Int
+  instances      OwnedCharacter[]
+}
+
+model OwnedCharacter {
+  id         String            @id @default(uuid())
+  userId     String
+  user       User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  templateId String
+  template   CharacterTemplate @relation(fields: [templateId], references: [id])
+  level      Int               @default(1)
+  experience Int               @default(0)
+  equipments OwnedEquipment[]
+  createdAt  DateTime          @default(now())
+}
+
+model EquipmentTemplate {
+  id           String           @id @default(uuid())
+  name         String
+  slotType     String
+  bonusHealth  Int              @default(0)
+  bonusAttack  Int              @default(0)
+  bonusDefense Int              @default(0)
+  bonusSpeed   Int              @default(0)
+  instances    OwnedEquipment[]
+}
+
+model OwnedEquipment {
+  id          String            @id @default(uuid())
+  userId      String
+  user        User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  templateId  String
+  template    EquipmentTemplate @relation(fields: [templateId], references: [id])
+  characterId String?
+  character   OwnedCharacter?   @relation(fields: [characterId], references: [id])
+  createdAt   DateTime          @default(now())
+}
