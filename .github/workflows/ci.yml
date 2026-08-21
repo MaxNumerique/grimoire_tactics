@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -27,3 +29,6 @@ jobs:
 
       - name: Build Next.js Application
         run: npm run build
+
+      - name: Check Semantic Commit
+        run: git log origin/${{ github.base_ref }}..HEAD --oneline | grep -qE ' (feat|fix|docs|refactor|chore)(\(.*\))?:'
