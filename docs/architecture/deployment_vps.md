@@ -25,8 +25,6 @@ mkdir -p /home/maxnumerique/apps/grimoire_tactics
 ### 2.2 Y placer le fichier `docker-compose.yml`
 ```bash
 cat << 'EOF' > /home/maxnumerique/apps/grimoire_tactics/docker-compose.yml
-version: "3.8"
-
 services:
   app:
     image: ghcr.io/maxnumerique/grimoire_tactics:latest
