@@ -27,11 +27,11 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Build Next.js Application
-        run: npm run build
-
       - name: Run Oxlint
         run: npm run lint
 
       - name: Run Unit Tests
         run: npm test
+
+      - name: Build Next.js Application
+        run: npm run build
