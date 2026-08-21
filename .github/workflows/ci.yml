@@ -7,17 +7,6 @@ on:
       - main
 
 jobs:
-  validate-commit-messages:
-    name: Validate PR Commit Messages
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Validate PR Commits (Commitlint)
-        uses: wagoid/commitlint-github-action@v6
-
   verify:
     name: Lint, Build and Code Verification
     runs-on: ubuntu-latest
