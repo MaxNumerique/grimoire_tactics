@@ -90,7 +90,32 @@ Dans le dépôt GitHub (`Settings > Secrets and variables > Actions`) :
 
 ---
 
-## 4. Commandes Utiles sur le VPS
+---
+
+## 4. Cycle de Vie CI/CD & Stratégie de Release
+
+```mermaid
+graph TD
+    A["1. Branche feature (ex: feat/xxx)"] -->|Ouvre une PR vers dev| B["CI Checks (ci.yml)"]
+    B -->|Oxlint + Build + Check au moins 1 commit sémantique| C["PR Verte ✅"]
+    C -->|Merge dans dev| D["Release Candidate (deploy_prod.yml)"]
+    D -->|Semantic Release crée v1.1.0-rc.1| E["Branche dev à jour"]
+    E -->|PR de dev vers main| F["Release & Deploy VPS (deploy_prod.yml)"]
+    F -->|Semantic Release v1.1.0 + Build Docker + Migration Prisma DB| G["🚀 Application en Ligne sur VPS"]
+```
+
+### 4.1 Rôles des Workflows
+1. **`ci.yml` (Sur Pull Request)** :
+   - Exécute `npm run lint` (`oxlint`) et `npm run build`.
+   - Vérifie qu'il existe **au moins un commit sémantique** (`feat:`, `fix:`, etc.) dans la PR.
+2. **`deploy_prod.yml` (Sur Push / Merge)** :
+   - Exécute **`semantic-release`** : génère des pré-releases (`rc`) sur `dev` et des versions officielles sur `main`.
+   - Construit l'image Docker multi-stage Next.js standalone et la publie sur `ghcr.io`.
+   - Déploie sur le VPS via SSH et synchronise la base de données PostgreSQL (`npx prisma db push --accept-data-loss`).
+
+---
+
+## 5. Commandes Utiles sur le VPS
 
 ```bash
 cd /home/maxnumerique/apps/grimoire_tactics
