@@ -17,6 +17,8 @@ jobs:
     steps:
       - name: Validate Conventional Commit
         uses: amannn/action-semantic-pull-request@v5
+        with:
+          validateSingleCommit: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
