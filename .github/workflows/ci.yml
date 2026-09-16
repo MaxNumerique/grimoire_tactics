@@ -25,7 +25,7 @@ jobs:
         run: git log origin/${{ github.base_ref }}..HEAD --oneline | grep -qE ' (feat|fix|docs|refactor|chore)(\(.*\))?:'
 
       - name: Install Dependencies
-        run: npm install --no-package-lock
+        run: npm install --legacy-peer-deps
 
       - name: Run Oxlint
         run: npm run lint
