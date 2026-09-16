@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { registerSchema } from "@/schemas/api/auth";
+import { registerSchema, USER_PUBLIC_SELECT } from "@/schemas/api/auth";
 import { hashPassword } from "@/lib/auth/password";
 import { prisma } from "@/lib/prisma";
 
@@ -40,13 +40,7 @@ export async function POST(request: Request) {
         gold: 1000,
         gems: 100,
       },
-      select: {
-        id: true,
-        email: true,
-        gold: true,
-        gems: true,
-        createdAt: true,
-      },
+      select: USER_PUBLIC_SELECT,
     });
 
     return NextResponse.json(

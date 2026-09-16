@@ -27,5 +27,12 @@ export const loginSchema = z.object({
   password: z.string().min(1, "Le mot de passe est requis."),
 });
 
+export const USER_PUBLIC_SELECT = {
+  id: true,
+  email: true,
+  gold: true,
+  gems: true,
+} as const;
+
 export type RegisterInput = z.infer<typeof registerSchema>;
 export type LoginInput = z.infer<typeof loginSchema>;

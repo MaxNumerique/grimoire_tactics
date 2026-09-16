@@ -24,32 +24,22 @@ export async function POST(request: Request) {
       where: { email },
     });
 
-    if (!user) {
+    if (!user || !(await verifyPassword(password, user.password))) {
       return NextResponse.json(
         { error: "Identifiants invalides." },
         { status: 401 }
       );
     }
 
-    const isValidPassword = await verifyPassword(password, user.password);
-
-    if (!isValidPassword) {
-      return NextResponse.json(
-        { error: "Identifiants invalides." },
-        { status: 401 }
-      );
-    }
+    const userPayload = {
+      id: user.id,
+      email: user.email,
+      gold: user.gold,
+      gems: user.gems,
+    };
 
     return NextResponse.json(
-      {
-        message: "Connexion réussie",
-        user: {
-          id: user.id,
-          email: user.email,
-          gold: user.gold,
-          gems: user.gems,
-        },
-      },
+      { message: "Connexion réussie", user: userPayload },
       { status: 200 }
     );
   } catch (error) {
