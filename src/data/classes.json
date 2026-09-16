@@ -1,0 +1,62 @@
+[
+  {
+    "id": "warrior",
+    "name": "Guerrier",
+    "heroName": "Gideon du Lion",
+    "role": "Dégâts Physique",
+    "image": "/images/heroes/warrior.png",
+    "description": "Équilibré et dévastateur au corps-à-corps. Inflige d'importants dégâts physiques.",
+    "stats": {
+      "health": 120,
+      "attack": 28,
+      "defense": 18,
+      "speed": 14
+    },
+    "badgeColor": "#d4af37"
+  },
+  {
+    "id": "tank",
+    "name": "Tank",
+    "heroName": "Borin le Marteau",
+    "role": "Protecteur",
+    "image": "/images/heroes/tank.png",
+    "description": "Encaisse les assauts ennemis en première ligne et protège ses alliés les plus fragiles.",
+    "stats": {
+      "health": 180,
+      "attack": 16,
+      "defense": 32,
+      "speed": 10
+    },
+    "badgeColor": "#5c1d1d"
+  },
+  {
+    "id": "mage",
+    "name": "Mage",
+    "heroName": "Seraphina l'Arcaniste",
+    "role": "Dégâts Magiques",
+    "image": "/images/heroes/mage.png",
+    "description": "Déchaîne des tempêtes d'énergie magique à distance pour balayer les rangs adverses.",
+    "stats": {
+      "health": 85,
+      "attack": 35,
+      "defense": 12,
+      "speed": 16
+    },
+    "badgeColor": "#7b2cbf"
+  },
+  {
+    "id": "healer",
+    "name": "Soigneur",
+    "heroName": "Elara la Lumineuse",
+    "role": "Soutien & Soins",
+    "image": "/images/heroes/healer.png",
+    "description": "Restaure la santé des membres de l'escouade et leur octroie d'importants bénédictions.",
+    "stats": {
+      "health": 95,
+      "attack": 18,
+      "defense": 14,
+      "speed": 15
+    },
+    "badgeColor": "#2a9d8f"
+  }
+]

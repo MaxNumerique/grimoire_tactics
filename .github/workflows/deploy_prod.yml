@@ -29,10 +29,13 @@ jobs:
           node-version: 22
 
       - name: Install Dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps
 
       - name: Run Oxlint
         run: npm run lint
+
+      - name: Run Unit Tests
+        run: npm test
 
       - name: Build Next.js Application
         run: npm run build
