@@ -1,10 +1,11 @@
 "use client";
 
-import classesData from "@/data/classes.json";
-import { HeroCard, HeroClassData } from "@/components/ui/HeroCard";
+import heroesData from "@/data/heroes.json";
+import { HeroCard } from "@/components/ui/HeroCard";
+import { HeroDefinition } from "@/types/combat";
 
 export function ClassShowcase() {
-  const heroes = classesData as HeroClassData[];
+  const heroes = heroesData as HeroDefinition[];
 
   return (
     <section id="classes" className="py-10">

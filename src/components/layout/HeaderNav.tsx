@@ -8,9 +8,10 @@ export function HeaderNav() {
   const { user, isAuthenticated, openAuthModal, logout } = useAuthStore();
 
   const navLinks = [
-    { label: "JEU", href: "#hero" },
-    { label: "CLASSES", href: "#classes" },
-    { label: "STRATÉGIE", href: "#features" },
+    { label: "DONJONS", href: "/play" },
+    { label: "JEU", href: "/#hero" },
+    { label: "CLASSES", href: "/#classes" },
+    { label: "STRATÉGIE", href: "/#features" },
   ];
 
   return (
