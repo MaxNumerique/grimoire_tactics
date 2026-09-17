@@ -1,29 +1,47 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
-:root {
+@theme {
   --font-cinzel-decorative: 'Cinzel Decorative', serif;
   --font-cinzel: 'Cinzel', serif;
-  --font-inter: 'Inter', sans-serif;
-  --color-parchment-dark: #0e0c0a;
+  --font-sans: 'Inter', sans-serif;
+
+  /* Palette Or & Laiton */
+  --color-gold-bright: #f3d068;
+  --color-gold-primary: #d4af37;
+  --color-gold-border: #b89535;
+  --color-gold-dark: #997a22;
+  --color-gold-deep: #4a3410;
+
+  /* Palette Parchemin & Encre */
+  --color-parchment-ink-dark: #241a0f;
+  --color-parchment-ink-title: #3b2b16;
+  --color-parchment-ink-body: #5c4a35;
+  --color-parchment-light: #e2d9cd;
+  --color-parchment-muted: #a39482;
+  --color-parchment-placeholder: #6b5f52;
+
+  /* Palette Arcanes & Fonds */
+  --color-purple-arcane: #9d4edd;
+  --color-bg-dark: #0a0806;
+  --color-bg-header: #0d0a08;
+  --color-bg-card-dark: #1a140e;
+  --color-bg-input: #120e0b;
+  --color-bg-modal-from: #201a15;
+  --color-bg-modal-to: #14100d;
+
+  /* Alerte & Erreurs */
+  --color-error-bg: #5c1d1d;
+  --color-error-text: #ff9999;
 }
 
 body {
-  background-color: var(--color-parchment-dark);
-  color: #e2d9cd;
-  font-family: var(--font-inter);
+  background-color: var(--color-bg-dark);
+  color: var(--color-parchment-light);
+  font-family: var(--font-sans);
   overflow-x: hidden;
 }
 
-.font-cinzel-decorative {
-  font-family: var(--font-cinzel-decorative);
-}
-
-.font-cinzel {
-  font-family: var(--font-cinzel);
-}
-
-/* Guild Wars 2 Painterly Canvas Background with Real Watercolor Asset */
 .bg-painterly-canvas {
   background-image: 
     radial-gradient(circle at 50% 10%, rgba(148, 141, 120, 0.457) 0%, transparent 60%),
