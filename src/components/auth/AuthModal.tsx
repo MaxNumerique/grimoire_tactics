@@ -62,24 +62,24 @@ export function AuthModal() {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4 animate-in fade-in duration-200">
-      <div className="relative w-full max-w-md bg-gradient-to-b from-[#201a15]/95 to-[#14100d]/95 border-2 border-[#d4af37] p-8 shadow-[0_0_25px_rgba(212,175,55,0.3)]">
+      <div className="relative w-full max-w-md bg-gradient-to-b from-bg-modal-from/95 to-bg-modal-to/95 border-2 border-gold-primary p-8 shadow-[0_0_25px_rgba(212,175,55,0.3)]">
         <button
           onClick={closeAuthModal}
-          className="absolute top-4 right-4 text-[#a39482] hover:text-[#f3d068] text-xl font-bold transition-colors"
+          className="absolute top-4 right-4 text-parchment-muted hover:text-gold-bright text-xl font-bold transition-colors"
           aria-label="Fermer"
         >
           ✕
         </button>
 
-        <div className="flex border-b border-[rgba(212,175,55,0.25)] mb-6">
+        <div className="flex border-b border-gold-primary/25 mb-6">
           {(["register", "login"] as const).map((tab) => (
             <button
               key={tab}
               onClick={() => handleTabChange(tab)}
               className={`flex-1 py-3 font-cinzel text-sm font-bold tracking-wider transition-colors ${
                 activeTab === tab
-                  ? "text-[#f3d068] border-b-2 border-[#d4af37]"
-                  : "text-[#a39482] hover:text-[#e2d9cd]"
+                  ? "text-gold-bright border-b-2 border-gold-primary"
+                  : "text-parchment-muted hover:text-parchment-light"
               }`}
             >
               {tab === "register" ? "INSCRIPTION" : "CONNEXION"}

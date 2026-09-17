@@ -21,23 +21,23 @@ export function Input({
       {label && (
         <label
           htmlFor={inputId}
-          className="block font-cinzel text-xs font-semibold text-[#f3d068] uppercase tracking-wider mb-1"
+          className="block font-cinzel text-xs font-semibold text-gold-bright uppercase tracking-wider mb-1"
         >
           {label}
         </label>
       )}
       <input
         id={inputId}
-        className={`w-full bg-[#120e0b] border border-[rgba(212,175,55,0.3)] px-4 py-2.5 text-sm text-[#e2d9cd] placeholder-[#6b5f52] focus:outline-none focus:border-[#d4af37] transition-colors ${
-          error ? "border-[#ff9999]" : ""
+        className={`w-full bg-bg-input border border-gold-primary/30 px-4 py-2.5 text-sm text-parchment-light placeholder-parchment-placeholder focus:outline-none focus:border-gold-primary transition-colors ${
+          error ? "border-error-text" : ""
         } ${className}`}
         {...props}
       />
       {helperText && (
-        <p className="mt-1 text-[10px] text-[#a39482]">{helperText}</p>
+        <p className="mt-1 text-[10px] text-parchment-muted">{helperText}</p>
       )}
       {error && (
-        <p className="mt-1 text-xs text-[#ff9999]">{error}</p>
+        <p className="mt-1 text-xs text-error-text">{error}</p>
       )}
     </div>
   );

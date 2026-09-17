@@ -13,7 +13,7 @@ export function FormErrorMessage({ message, details, className = "" }: FormError
   if (!message) return null;
 
   return (
-    <div className={`bg-[#5c1d1d]/40 border border-[#5c1d1d] p-3 text-xs text-[#ff9999] rounded-sm ${className}`}>
+    <div className={`bg-error-bg/40 border border-error-bg p-3 text-xs text-error-text rounded-sm ${className}`}>
       <strong className="block font-semibold">{message}</strong>
       {details && details.length > 0 && (
         <ul className="mt-1 list-disc list-inside space-y-0.5 text-[11px]">
