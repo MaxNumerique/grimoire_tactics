@@ -14,10 +14,7 @@ export default function Home() {
         </main>
       </div>
 
-      {/* Footer */}
-      <footer className="border-t border-[rgba(212,175,55,0.2)] bg-[#0a0806] py-8 text-center text-xs text-[#8c7e6c]">
-      
-      </footer>
+      <footer className="border-t border-[rgba(212,175,55,0.2)] bg-[#0a0806] py-8 text-center text-xs text-[#8c7e6c]"></footer>
 
       <AuthModal />
     </div>

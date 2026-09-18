@@ -1,35 +1,20 @@
 import Image from "next/image";
 import { getHeroTheme } from "@/data/heroThemes";
 import { StatIcon } from "@/components/ui/StatIcon";
-
-export interface HeroClassData {
-  id: string;
-  name: string;
-  heroName: string;
-  role: string;
-  image: string;
-  description: string;
-  stats: {
-    health: number;
-    attack: number;
-    defense: number;
-    speed: number;
-  };
-  badgeColor: string;
-}
+import { HeroDefinition } from "@/types/combat";
 
 interface HeroCardProps {
-  hero: HeroClassData;
+  hero: HeroDefinition;
 }
 
 export function HeroCard({ hero }: HeroCardProps) {
-  const theme = getHeroTheme(hero.id);
+  const theme = getHeroTheme(hero.category);
 
   const statItems = [
-    { type: "health" as const, value: hero.stats.health },
-    { type: "attack" as const, value: hero.stats.attack },
-    { type: "defense" as const, value: hero.stats.defense },
-    { type: "speed" as const, value: hero.stats.speed },
+    { type: "health" as const, value: hero.baseStats.health },
+    { type: "attack" as const, value: hero.baseStats.attack },
+    { type: "defense" as const, value: hero.baseStats.defense },
+    { type: "speed" as const, value: hero.baseStats.speed },
   ];
 
   return (
@@ -75,8 +60,8 @@ export function HeroCard({ hero }: HeroCardProps) {
         </div>
 
         <div className="text-center mb-2">
-          <span className="font-cinzel text-xs font-bold text-parchment-ink-title">
-            {hero.heroName}
+          <span className="font-cinzel text-xs font-bold text-parchment-ink-title capitalize">
+            {hero.category}
           </span>
         </div>
 

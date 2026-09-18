@@ -1,0 +1,98 @@
+[
+  {
+    "id": "gideon-lion",
+    "name": "Gidéon le Lion",
+    "category": "warrior",
+    "rarity": "rare",
+    "description": "Guerrier tranchant maîtrisant le feu.",
+    "image": "/images/heroes/warrior.png",
+    "baseStats": {
+      "health": 120,
+      "attack": 25,
+      "defense": 12,
+      "speed": 10
+    },
+    "statGrowthPerLevel": {
+      "health": 15,
+      "attack": 3.5,
+      "defense": 1.5,
+      "speed": 0.5
+    },
+    "weaponType": "tranchant",
+    "elementType": "feu",
+    "weaponWeakness": "contendant",
+    "elementWeakness": "eau"
+  },
+  {
+    "id": "borin-marteau",
+    "name": "Borin Brise-Roc",
+    "category": "tank",
+    "rarity": "epic",
+    "description": "Protecteur contendant de l'élément Terre.",
+    "image": "/images/heroes/tank.png",
+    "baseStats": {
+      "health": 180,
+      "attack": 15,
+      "defense": 22,
+      "speed": 6
+    },
+    "statGrowthPerLevel": {
+      "health": 25,
+      "attack": 2.0,
+      "defense": 3.0,
+      "speed": 0.2
+    },
+    "weaponType": "contendant",
+    "elementType": "terre",
+    "weaponWeakness": "transperce",
+    "elementWeakness": "foudre"
+  },
+  {
+    "id": "elena-ombre",
+    "name": "Éléna Flamme-Céleste",
+    "category": "mage",
+    "rarity": "epic",
+    "description": "Mage à distance maniant la Foudre.",
+    "image": "/images/heroes/mage.png",
+    "baseStats": {
+      "health": 85,
+      "attack": 32,
+      "defense": 6,
+      "speed": 12
+    },
+    "statGrowthPerLevel": {
+      "health": 10,
+      "attack": 4.5,
+      "defense": 0.8,
+      "speed": 0.8
+    },
+    "weaponType": "distance",
+    "elementType": "foudre",
+    "weaponWeakness": "tranchant",
+    "elementWeakness": "tenebres"
+  },
+  {
+    "id": "valerius-soin",
+    "name": "Valérius de l'Aube",
+    "category": "healer",
+    "rarity": "rare",
+    "description": "Soigneur saint infusé de Lumière.",
+    "image": "/images/heroes/healer.png",
+    "baseStats": {
+      "health": 100,
+      "attack": 18,
+      "defense": 8,
+      "speed": 11
+    },
+    "statGrowthPerLevel": {
+      "health": 12,
+      "attack": 2.5,
+      "defense": 1.0,
+      "speed": 0.6
+    },
+    "weaponType": "distance",
+    "elementType": "lumiere",
+    "weaponWeakness": "transperce",
+    "elementWeakness": "tenebres"
+  }
+]

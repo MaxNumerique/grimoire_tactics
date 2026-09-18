@@ -1,0 +1,140 @@
+[
+  {
+    "id": "goblin_scout",
+    "name": "Éclaireur Goblin",
+    "category": "warrior",
+    "rarity": "common",
+    "baseStats": {
+      "health": 80,
+      "attack": 20,
+      "defense": 10,
+      "speed": 16
+    },
+    "statGrowthPerLevel": {
+      "health": 10,
+      "attack": 2.5,
+      "defense": 1.0,
+      "speed": 0.5
+    },
+    "weaponType": "tranchant",
+    "elementType": "physique",
+    "weaponWeakness": "distance",
+    "elementWeakness": "feu",
+    "image": "/images/heroes/warrior.png"
+  },
+  {
+    "id": "iron_golem",
+    "name": "Golem de Fer",
+    "category": "tank",
+    "rarity": "common",
+    "baseStats": {
+      "health": 150,
+      "attack": 14,
+      "defense": 28,
+      "speed": 8
+    },
+    "statGrowthPerLevel": {
+      "health": 20,
+      "attack": 1.5,
+      "defense": 3.0,
+      "speed": 0.2
+    },
+    "weaponType": "contendant",
+    "elementType": "terre",
+    "weaponWeakness": "contendant",
+    "elementWeakness": "eau",
+    "image": "/images/heroes/tank.png"
+  },
+  {
+    "id": "arcane_cultist",
+    "name": "Cultiste Arcanique",
+    "category": "mage",
+    "rarity": "rare",
+    "baseStats": {
+      "health": 75,
+      "attack": 32,
+      "defense": 8,
+      "speed": 15
+    },
+    "statGrowthPerLevel": {
+      "health": 8,
+      "attack": 4.0,
+      "defense": 0.8,
+      "speed": 0.6
+    },
+    "weaponType": "distance",
+    "elementType": "tenebres",
+    "weaponWeakness": "tranchant",
+    "elementWeakness": "lumiere",
+    "image": "/images/heroes/mage.png"
+  },
+  {
+    "id": "shadow_priest",
+    "name": "Prêtre des Ombres",
+    "category": "healer",
+    "rarity": "rare",
+    "baseStats": {
+      "health": 85,
+      "attack": 16,
+      "defense": 12,
+      "speed": 14
+    },
+    "statGrowthPerLevel": {
+      "health": 9,
+      "attack": 2.0,
+      "defense": 1.2,
+      "speed": 0.5
+    },
+    "weaponType": "distance",
+    "elementType": "tenebres",
+    "weaponWeakness": "transperce",
+    "elementWeakness": "lumiere",
+    "image": "/images/heroes/healer.png"
+  },
+  {
+    "id": "orc_berserker",
+    "name": "Berserker Orc",
+    "category": "warrior",
+    "rarity": "epic",
+    "baseStats": {
+      "health": 130,
+      "attack": 34,
+      "defense": 16,
+      "speed": 17
+    },
+    "statGrowthPerLevel": {
+      "health": 16,
+      "attack": 4.2,
+      "defense": 1.8,
+      "speed": 0.6
+    },
+    "weaponType": "tranchant",
+    "elementType": "feu",
+    "weaponWeakness": "distance",
+    "elementWeakness": "eau",
+    "image": "/images/heroes/warrior.png"
+  },
+  {
+    "id": "bronze_dragon",
+    "name": "Dragon de Bronze",
+    "category": "tank",
+    "rarity": "legendary",
+    "baseStats": {
+      "health": 250,
+      "attack": 38,
+      "defense": 35,
+      "speed": 18
+    },
+    "statGrowthPerLevel": {
+      "health": 30,
+      "attack": 5.0,
+      "defense": 4.0,
+      "speed": 0.5
+    },
+    "weaponType": "contendant",
+    "elementType": "foudre",
+    "weaponWeakness": "transperce",
+    "elementWeakness": "terre",
+    "image": "/images/heroes/tank.png"
+  }
+]
