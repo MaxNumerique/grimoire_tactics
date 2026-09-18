@@ -8,6 +8,8 @@ export interface ActionResult {
   elementWeaknessHit?: boolean;
 }
 
+export type DamageResult = ActionResult;
+
 export function calculateDamage(
   attackerUnit: CombatUnit,
   defenderUnit: CombatUnit,

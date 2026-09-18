@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { generateTurnQueue } from "@/engine/combat/initiative";
+import { generateTurnQueue } from "@/engine/combat/timeline";
 import { calculateDamage } from "@/engine/combat/damage";
 import { selectTarget } from "@/engine/combat/targeting";
 import { buildWaveEnemies, evaluateBattleOutcome } from "@/engine/combat/instanceResolver";
@@ -40,7 +40,7 @@ describe("Combat Engine & Instance Resolver", () => {
 
     const turnQueue = generateTurnQueue([unitSlow, unitFast, unitMid]);
 
-    expect(turnQueue.map((unit) => unit.id)).toEqual(["fast", "mid", "slow"]);
+    expect(turnQueue.map((unit: CombatUnit) => unit.id)).toEqual(["fast", "mid", "slow"]);
   });
 
   it("should calculate damage with defense reduction", () => {

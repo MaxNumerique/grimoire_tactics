@@ -7,6 +7,7 @@ import {
   WaveConfig,
 } from "@/types/combat";
 import { createCombatUnitInstance } from "@/engine/combat/unitFactory";
+import { isUnitAlive } from "@/engine/combat/unitState";
 import enemiesData from "@/data/enemies.json";
 
 const enemyDictionary: Record<string, EnemyDefinition> = (
@@ -47,10 +48,10 @@ export function evaluateBattleOutcome(
   currentWaveNumber: 1 | 2 | 3
 ): BattleOutcome {
   const hasLivingPlayer = units.some(
-    (unit) => unit.side === "player" && !unit.isDead && unit.currentHealth > 0
+    (unit) => unit.side === "player" && isUnitAlive(unit)
   );
   const hasLivingEnemy = units.some(
-    (unit) => unit.side === "enemy" && !unit.isDead && unit.currentHealth > 0
+    (unit) => unit.side === "enemy" && isUnitAlive(unit)
   );
 
   if (!hasLivingPlayer) return "defeat";
@@ -69,7 +70,7 @@ export function transitionToNextWave(
   const newWaveEnemies = buildWaveEnemies(nextWaveConfig);
 
   const refreshedPlayerUnits = playerUnits.map((playerUnit) => {
-    if (playerUnit.isDead) return playerUnit;
+    if (!isUnitAlive(playerUnit)) return playerUnit;
     const healAmount = Math.round(playerUnit.effectiveStats.health * 0.1);
     const newHealth = Math.min(
       playerUnit.effectiveStats.health,

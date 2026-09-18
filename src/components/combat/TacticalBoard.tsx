@@ -1,12 +1,11 @@
 "use client";
 
-import Image from "next/image";
-import { useCombatStore } from "@/stores/combatStore";
+import { useCombatStore } from "@/stores/combat";
 import { UnitSlotCard } from "@/components/combat/UnitSlotCard";
-import { HERO_BADGE_THEMES } from "@/data/heroThemes";
+import { TurnQueueRibbon } from "@/components/combat/TurnQueueRibbon";
 
 export function TacticalBoard() {
-  const { dungeon, currentWaveNumber, turnQueue, units, activeUnitId } = useCombatStore();
+  const { dungeon, currentWaveNumber, units, activeUnitId } = useCombatStore();
 
   const playerUnits = units.filter((unit) => unit.side === "player");
   const enemyUnits = units.filter((unit) => unit.side === "enemy");
@@ -44,48 +43,16 @@ export function TacticalBoard() {
         </div>
 
         {/* Center edge of battlefield: Rune Title */}
-        <div className="flex flex-col items-center gap-0.5 opacity-60 my-1 shrink-0">
+        <div className="flex flex-col items-center gap-0.5 opacity-60 my-auto shrink-0">
           <span className="font-cinzel text-[10px] font-black uppercase tracking-widest text-parchment-ink-title">
             CHAMP DE BATAILLE TACTIQUE
           </span>
           <div className="w-20 h-[1px] bg-gold-border/50" />
         </div>
 
-        {/* Bottom edge of battlefield: Compact Initiative Queue */}
-        <div className="w-full flex items-center justify-center gap-1.5 overflow-x-auto pt-1 border-t border-gold-border/30 scrollbar-thin shrink-0">
-          <span className="font-cinzel text-[9px] font-black uppercase text-parchment-ink-title opacity-80 mr-1 shrink-0">
-            INITIATIVE:
-          </span>
-          {turnQueue.map((unit, index) => {
-            const isActive = unit.id === activeUnitId;
-            const isPlayer = unit.side === "player";
-            const theme = HERO_BADGE_THEMES[unit.category] || HERO_BADGE_THEMES.warrior;
-
-            return (
-              <div
-                key={`${unit.id}_${index}`}
-                className={`flex items-center gap-1 rounded px-1.5 py-0.5 border text-[9px] font-cinzel font-bold transition-all shrink-0 ${
-                  isActive
-                    ? "border-gold-bright bg-amber-950 text-gold-bright ring-1 ring-gold-bright scale-105"
-                    : isPlayer
-                      ? "border-gold-border/40 bg-slate-950/40 text-parchment-ink-dark"
-                      : "border-red-900/40 bg-red-950/40 text-red-950"
-                }`}
-                title={`${unit.name} (Vitesse: ${unit.effectiveStats.speed})`}
-              >
-                <div className="relative h-4 w-4 rounded-full overflow-hidden border border-gold-border/60">
-                  <Image
-                    src={theme.imageBadge}
-                    alt={unit.category}
-                    fill
-                    sizes="16px"
-                    className="object-cover"
-                  />
-                </div>
-                <span className="truncate max-w-[65px]">{unit.name}</span>
-              </div>
-            );
-          })}
+        {/* Timeline d'initiative fixée en bas à droite du champ de bataille tactique */}
+        <div className="absolute bottom-2 right-2 z-20 max-w-[75%] sm:max-w-[80%] flex justify-end">
+          <TurnQueueRibbon />
         </div>
       </div>
 

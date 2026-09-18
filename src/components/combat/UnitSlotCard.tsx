@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { CombatUnit, ElementType, HeroCategory } from "@/types/combat";
 import { HERO_BADGE_THEMES } from "@/data/heroThemes";
+import { getHealthPercentage, isUnitAlive } from "@/engine/combat/unitState";
 
 interface UnitSlotCardProps {
   unit: CombatUnit | null;
@@ -83,11 +84,8 @@ export function UnitSlotCard({ unit, isActiveTurn, onSelect }: UnitSlotCardProps
     );
   }
 
-  const healthPercentage = Math.max(
-    0,
-    Math.min(100, Math.round((unit.currentHealth / unit.effectiveStats.health) * 100)),
-  );
-  const isUnitDead = unit.isDead || unit.currentHealth <= 0;
+  const healthPercentage = getHealthPercentage(unit);
+  const isUnitDead = !isUnitAlive(unit);
   const isPlayer = unit.side === "player";
 
   return (

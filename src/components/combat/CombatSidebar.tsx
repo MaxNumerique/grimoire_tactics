@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
-import { useCombatStore } from "@/stores/combatStore";
+import { useEffect, useRef } from "react";
+import { useCombatStore } from "@/stores/combat";
 import { Button } from "@/components/ui/Button";
 
 export function CombatSidebar() {
@@ -16,6 +16,14 @@ export function CombatSidebar() {
     togglePlayPause,
     activeUnitId,
   } = useCombatStore();
+
+  const logContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (logContainerRef.current) {
+      logContainerRef.current.scrollTop = logContainerRef.current.scrollHeight;
+    }
+  }, [logs]);
 
   useEffect(() => {
     if (!isPlaying || battleOutcome !== "ongoing") return;
@@ -39,34 +47,86 @@ export function CombatSidebar() {
 
       {/* TOP: COMBAT LOG */}
       <div className="flex-1 flex flex-col min-h-0 mb-3 relative z-10">
-        <div className="text-center border-b border-gold-border/40 pb-1.5 mb-2.5">
-          <h3 className="font-cinzel text-xs font-black uppercase tracking-widest text-parchment-ink-title">
-            JOURNAL DES ARCANES
-          </h3>
+        <div className="text-center border-b border-gold-border/40 pb-1 mb-2">
+          <span className="font-cinzel text-[10px] font-black uppercase tracking-widest text-parchment-ink-title">
+            CHRONIQUES DE COMBAT
+          </span>
         </div>
 
-        <div className="flex-1 min-h-0 overflow-y-auto pr-1 flex flex-col gap-2 scrollbar-thin">
+        <div
+          ref={logContainerRef}
+          className="flex-1 min-h-0 overflow-y-auto pr-1 flex flex-col gap-1.5 scrollbar-thin scroll-smooth"
+        >
           {logs.length === 0 ? (
             <span className="font-cinzel text-xs text-parchment-ink-dark/50 italic text-center block py-4">
               En attente du premier coup de sort...
             </span>
           ) : (
-            logs.map((logEntry) => (
-              <div
-                key={logEntry.id}
-                className={`font-cinzel text-[11px] font-bold leading-relaxed border-l-2 pl-2 py-0.5 ${
-                  logEntry.type === "wave_start"
-                    ? "border-amber-700 text-amber-900 bg-amber-500/10 font-black"
-                    : logEntry.type === "kill"
-                    ? "border-red-700 text-red-950 font-black"
-                    : logEntry.type === "heal"
-                    ? "border-emerald-700 text-emerald-950"
-                    : "border-gold-border/60 text-parchment-ink-dark"
-                }`}
-              >
-                {logEntry.message}
-              </div>
-            ))
+            logs.map((logEntry) => {
+              const isAttackOrKill = logEntry.type === "attack" || logEntry.type === "kill";
+              const isHeal = logEntry.type === "heal";
+
+              const renderUnitName = (name: string, side?: "player" | "enemy") => (
+                <span
+                  className={
+                    side === "player"
+                      ? "font-black text-blue-900"
+                      : side === "enemy"
+                      ? "font-black text-red-800"
+                      : "font-black text-parchment-ink-title"
+                  }
+                >
+                  {name}
+                </span>
+              );
+
+              return (
+                <div
+                  key={logEntry.id}
+                  className={`font-cinzel text-[11px] leading-relaxed py-0.5 ${
+                    logEntry.type === "wave_start"
+                      ? "text-amber-950 font-bold border-b border-gold-border/30 pb-1"
+                      : "text-parchment-ink-dark"
+                  }`}
+                >
+                  {isAttackOrKill && logEntry.actorName ? (
+                    <div>
+                      {logEntry.isCritical && (
+                        <span className="font-black text-amber-900 tracking-wider mr-1">
+                          COUP CRITIQUE !{" "}
+                        </span>
+                      )}
+                      {renderUnitName(logEntry.actorName, logEntry.actorSide)}
+                      <span> inflige </span>
+                      <span className="font-black text-red-700 text-[11.5px]">
+                        {logEntry.amount}
+                      </span>
+                      <span> dégâts à </span>
+                      {renderUnitName(logEntry.targetName || "la cible", logEntry.targetSide)}
+                      <span>.</span>
+                      {logEntry.isKo && (
+                        <div className="font-black text-red-700 tracking-wider mt-0.5">
+                          K.O. !
+                        </div>
+                      )}
+                    </div>
+                  ) : isHeal && logEntry.actorName ? (
+                    <div>
+                      {renderUnitName(logEntry.actorName, logEntry.actorSide)}
+                      <span> soigne </span>
+                      {renderUnitName(logEntry.targetName || "l'allié", logEntry.targetSide)}
+                      <span> de </span>
+                      <span className="font-black text-emerald-700 text-[11.5px]">
+                        {logEntry.amount}
+                      </span>
+                      <span> PV.</span>
+                    </div>
+                  ) : (
+                    <div className="whitespace-pre-line font-medium">{logEntry.message}</div>
+                  )}
+                </div>
+              );
+            })
           )}
         </div>
       </div>

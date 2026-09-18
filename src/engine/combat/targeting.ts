@@ -1,12 +1,11 @@
 import { CombatUnit } from "@/types/combat";
+import { getLivingUnits } from "@/engine/combat/unitState";
 
 export function selectTarget(
   actorUnit: CombatUnit,
   allUnits: CombatUnit[]
 ): CombatUnit | null {
-  const livingUnits = allUnits.filter(
-    (unit) => !unit.isDead && unit.currentHealth > 0
-  );
+  const livingUnits = getLivingUnits(allUnits);
 
   if (actorUnit.category === "healer") {
     const allyUnits = livingUnits.filter(

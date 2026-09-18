@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { HeaderNav } from "@/components/layout/HeaderNav";
-import { useCombatStore } from "@/stores/combatStore";
+import { useCombatStore } from "@/stores/combat";
 import { TacticalBoard } from "@/components/combat/TacticalBoard";
 import { CombatSidebar } from "@/components/combat/CombatSidebar";
 import { Button } from "@/components/ui/Button";

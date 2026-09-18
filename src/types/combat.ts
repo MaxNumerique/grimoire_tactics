@@ -125,6 +125,13 @@ export interface CombatLogEntry {
   waveNumber: number;
   message: string;
   type: "attack" | "heal" | "skill" | "kill" | "wave_start" | "victory" | "defeat";
+  isCritical?: boolean;
+  amount?: number;
+  isKo?: boolean;
+  actorName?: string;
+  targetName?: string;
+  actorSide?: UnitSide;
+  targetSide?: UnitSide;
 }
 
 export type BattleOutcome = "ongoing" | "wave_cleared" | "victory" | "defeat";
