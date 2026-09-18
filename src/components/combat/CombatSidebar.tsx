@@ -45,7 +45,7 @@ export function CombatSidebar() {
           </h3>
         </div>
 
-        <div className="flex-1 overflow-y-auto pr-1 flex flex-col gap-2 scrollbar-thin max-h-[380px]">
+        <div className="flex-1 min-h-0 overflow-y-auto pr-1 flex flex-col gap-2 scrollbar-thin">
           {logs.length === 0 ? (
             <span className="font-cinzel text-xs text-parchment-ink-dark/50 italic text-center block py-4">
               En attente du premier coup de sort...
