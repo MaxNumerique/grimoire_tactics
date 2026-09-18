@@ -10,8 +10,41 @@ on:
   workflow_dispatch:
 
 jobs:
+  sync_dev_to_main:
+    name: Sync dev to main (Nightly)
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Sync dev into main
+        run: |
+          git checkout main
+          git pull origin main
+          git fetch origin dev:dev
+          COMMITS_AHEAD=$(git rev-list --count main..dev)
+          if [ "$COMMITS_AHEAD" -gt 0 ]; then
+            echo "Found $COMMITS_AHEAD new commits in dev. Merging into main..."
+            git merge dev --no-ff -m "chore(release): nightly merge dev into main [skip ci]"
+            git push origin main
+          else
+            echo "No new commits in dev to merge."
+          fi
+
   release:
     name: Semantic Commit, Tests, Oxlint
+    needs: [sync_dev_to_main]
+    if: always() && (needs.sync_dev_to_main.result == 'success' || needs.sync_dev_to_main.result == 'skipped')
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -49,7 +82,7 @@ jobs:
   deploy:
     name: Build Docker & Deploy to VPS
     needs: release
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' || github.event_name == 'schedule'
     runs-on: ubuntu-latest
     permissions:
       packages: write
