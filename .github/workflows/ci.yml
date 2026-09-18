@@ -1,7 +1,8 @@
-name: CI Checks
+name: CI & Cleanup Checks
 
 on:
   pull_request:
+    types: [opened, synchronize, reopened, closed]
     branches:
       - dev
       - main
@@ -9,6 +10,7 @@ on:
 jobs:
   verify:
     name: Lint, Build and Code Verification
+    if: github.event.action != 'closed'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -35,3 +37,19 @@ jobs:
 
       - name: Build Next.js Application
         run: npm run build
+
+  delete_merged_branch:
+    name: Delete Merged Branch
+    if: github.event.action == 'closed' && github.event.pull_request.merged == true && github.event.pull_request.head.ref != 'main' && github.event.pull_request.head.ref != 'dev'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Delete Branch
+        run: |
+          BRANCH_NAME="${{ github.event.pull_request.head.ref }}"
+          echo "Deleting merged branch: $BRANCH_NAME"
+          git push origin --delete "$BRANCH_NAME"
